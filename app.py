@@ -10,7 +10,7 @@ def open_media_window():
     sound_path = os.path.join("media", "Wheeze.mp3")
 
     new_window = tk.Toplevel(root)
-    new_window.title("Shrimp Media")
+    new_window.title("")
 
     try:
         img = Image.open(image_path)
@@ -23,7 +23,6 @@ def open_media_window():
         pygame.mixer.music.load(sound_path)
         pygame.mixer.music.play()
 
-        # Stop sound when closing window
         new_window.protocol("WM_DELETE_WINDOW", lambda: (pygame.mixer.music.stop(), new_window.destroy()))
 
     except Exception as e:
@@ -39,11 +38,9 @@ def ask_if_shrimp():
     label = tk.Label(prompt_window, text="Are you a shrimp?", font=("Arial", 14))
     label.pack(pady=20)
 
-    # Yes button → open media window
     yes_button = tk.Button(prompt_window, text="Yes", command=lambda: [open_media_window(), prompt_window.destroy()])
     yes_button.pack(side="left", padx=40)
 
-    # No button → just close prompt
     no_button = tk.Button(prompt_window, text="No", command=prompt_window.destroy)
     no_button.pack(side="right", padx=40)
 
